@@ -1,0 +1,23 @@
+<resources>
+    <string name="note_saved">
+        Note saved!
+    </string>
+    <string name="note_failed_on_saving">
+        Failure failed on saving!
+    </string>
+    <string name="note_title_placeholder">
+        Give a title for your note
+    </string>
+    <string name="note_description_placeholder">
+        Describe your note
+    </string>
+    <string name="navigate_back_content_description">
+        Back to previous screen
+    </string>
+    <string name="note">
+        Note
+    </string>
+    <string name="note_save_content_description">
+        Save your changes for this note
+    </string>
+</resources>
