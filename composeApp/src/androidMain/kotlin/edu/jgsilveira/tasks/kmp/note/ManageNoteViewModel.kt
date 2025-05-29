@@ -61,7 +61,7 @@ internal class ManageNoteViewModel(
                 ?: return@update currentState
             uiState.copy(
                 viewData = uiState.viewData.copy(
-                    descriptions = description
+                    description = description
                 )
             )
         }

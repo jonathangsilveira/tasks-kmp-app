@@ -8,5 +8,5 @@ internal const val NEW_NOTE_ID = 0L
 internal data class NoteChangesViewData(
     val noteId: Long = NEW_NOTE_ID,
     val title: String = "",
-    val descriptions: String? = null
+    val description: String? = null
 )

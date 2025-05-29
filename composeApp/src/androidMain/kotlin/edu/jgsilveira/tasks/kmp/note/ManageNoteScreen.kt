@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
@@ -25,7 +24,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -108,6 +106,12 @@ internal fun ManageNoteScreen(
                 }
             }
         }
+        val lifecycleOwner = LocalLifecycleOwner.current
+        LaunchedEffect(Unit) {
+            lifecycleOwner.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
+                viewModel.getNote()
+            }
+        }
     }
 }
 
@@ -135,7 +139,7 @@ private fun ManageNoteTopBar(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    modifier = Modifier.size(16.dp),
+                    modifier = Modifier.fillMaxSize(),
                     contentDescription = stringResource(
                         Res.string.navigate_back_content_description
                     )
@@ -150,7 +154,7 @@ private fun ManageNoteTopBar(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Done,
-                    modifier = Modifier.size(16.dp),
+                    modifier = Modifier.fillMaxSize(),
                     contentDescription = stringResource(
                         Res.string.note_save_content_description
                     )
@@ -178,28 +182,32 @@ internal fun ManageNoteContent(
             },
             placeholder = {
                 Text(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxWidth(),
                     text = stringResource(
                         Res.string.note_title_placeholder
                     )
                 )
             },
+            maxLines = 1,
             modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 8.dp)
         )
         TextField(
-            value = viewData.title,
+            value = viewData.description.orEmpty(),
             onValueChange = { newDescription ->
                 onDescriptionChange?.invoke(newDescription)
             },
             placeholder = {
                 Text(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxWidth(),
                     text = stringResource(
                         Res.string.note_description_placeholder
                     )
                 )
             },
-            modifier = Modifier.fillMaxSize()
+            maxLines = 3,
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 8.dp)
         )
     }
 }
@@ -231,7 +239,7 @@ internal fun ConsumeUIEffect(
 internal fun ManageNoteContentPreview() {
     val viewData = NoteChangesViewData(
         title = "",
-        descriptions = ""
+        description = ""
     )
     ManageNoteContent(
         viewData = viewData,

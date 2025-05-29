@@ -16,7 +16,7 @@ internal class ManageNoteInteractor(
     ): NoteChangesViewData {
         val noteChanges = NoteChanges(
             title = viewData.title,
-            description = viewData.descriptions
+            description = viewData.description
         )
         val note = if (viewData.noteId == NEW_NOTE_ID) {
             newNote(noteChanges)
@@ -35,7 +35,7 @@ internal class ManageNoteInteractor(
             NoteChangesViewData(
                 noteId = note.id,
                 title = note.title,
-                descriptions = note.title
+                description = note.title
             )
         } ?: NoteChangesViewData()
     }
