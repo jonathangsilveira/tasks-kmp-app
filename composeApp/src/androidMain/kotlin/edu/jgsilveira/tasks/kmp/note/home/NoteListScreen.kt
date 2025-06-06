@@ -1,5 +1,7 @@
 package edu.jgsilveira.tasks.kmp.note.home
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -76,7 +78,8 @@ internal fun NoteListScreen(
         modifier = modifier,
         topBar = {
             NoteListTopBar(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .wrapContentHeight(),
                 onNavigateIconClick = {
                     viewModel.navigateToPrevious()
@@ -170,7 +173,8 @@ internal fun NoteListContent(
 ) {
     val lazyListState = rememberLazyListState()
     LazyColumn(
-        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(space = 8.dp),
+        modifier = modifier.padding(all = 16.dp),
         state = lazyListState
     ) {
         items(
@@ -178,25 +182,37 @@ internal fun NoteListContent(
             key = { it.noteId },
             contentType = { it }
         ) { note ->
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-                    .heightIn(
-                        min = 48.dp,
-                        max = 56.dp
+                    .border(
+                        border = BorderStroke(
+                            width = 2.dp,
+                            color = MaterialTheme.colors.primary
+                        ),
+                        shape = MaterialTheme.shapes.medium
                     )
                     .clickable {
                         onNoteClick(note)
                     }
+                    .padding(8.dp)
+
             ) {
-                Text(text = note.title)
-                if (!note.description.isNullOrBlank())
-                    Text(
-                        text = note.description,
-                        maxLines = 2
-                    )
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(
+                            min = 48.dp,
+                            max = 56.dp
+                        )
+                ) {
+                    Text(text = note.title)
+                    if (!note.description.isNullOrBlank())
+                        Text(
+                            text = note.description,
+                            maxLines = 2
+                        )
+                }
             }
         }
     }
