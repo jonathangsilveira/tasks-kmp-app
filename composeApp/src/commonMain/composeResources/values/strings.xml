@@ -29,4 +29,8 @@
     <string name="note_add_contnet_description">
         Add a new note
     </string>
+    <string name="notes_list_empty_state_message">
+        There are no notes yet.
+        Click on "Add new note" button to add your brand new one!
+    </string>
 </resources>
