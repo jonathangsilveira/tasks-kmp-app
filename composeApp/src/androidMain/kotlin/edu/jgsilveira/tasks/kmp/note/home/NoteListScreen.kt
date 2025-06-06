@@ -44,6 +44,7 @@ import taskskmpapp.composeapp.generated.resources.Res
 import taskskmpapp.composeapp.generated.resources.generic_error_message
 import taskskmpapp.composeapp.generated.resources.navigate_back_content_description
 import taskskmpapp.composeapp.generated.resources.note_add_contnet_description
+import taskskmpapp.composeapp.generated.resources.notes_list_empty_state_message
 import taskskmpapp.composeapp.generated.resources.notes_screen_title
 
 @Composable
@@ -124,6 +125,10 @@ internal fun NoteListStateContent(
             modifier = modifier
         )
 
+        NoteListUIState.Empty -> NoteListEmptyContent(
+            modifier = modifier
+        )
+
         else -> NoteListLoadingContent(
             modifier = modifier
         )
@@ -194,6 +199,24 @@ internal fun NoteListContent(
                     )
             }
         }
+    }
+}
+
+@Composable
+private fun NoteListEmptyContent(
+    modifier: Modifier = Modifier
+) {
+    Box(modifier) {
+        Text(
+            text = stringResource(
+                Res.string.notes_list_empty_state_message
+            ),
+            style = MaterialTheme.typography.h6,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .padding(vertical = 20.dp)
+                .align(Alignment.TopCenter)
+        )
     }
 }
 

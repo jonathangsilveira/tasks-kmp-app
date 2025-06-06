@@ -31,7 +31,11 @@ internal class NoteListViewModel(
             mutableState.value = NoteListUIState.Loading
             interactor.getAllNotes()
                 .onSuccess { items ->
-                    val newState = NoteListUIState.Content(items)
+                    val newState = if (items.isEmpty()) {
+                        NoteListUIState.Empty
+                    } else {
+                        NoteListUIState.Content(items)
+                    }
                     mutableState.value = newState
                 }
                 .onFailure {

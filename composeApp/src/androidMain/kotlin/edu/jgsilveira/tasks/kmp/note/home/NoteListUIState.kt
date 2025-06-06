@@ -9,5 +9,6 @@ internal sealed interface NoteListUIState {
     data class Content(
         val notes: List<NoteItemViewData>
     ) : NoteListUIState
+    data object Empty : NoteListUIState
     data object Error: NoteListUIState
 }
