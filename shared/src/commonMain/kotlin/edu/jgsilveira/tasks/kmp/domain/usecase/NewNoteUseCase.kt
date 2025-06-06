@@ -15,7 +15,7 @@ class NewNoteUseCase(
     private val coroutineDispatcher: CoroutineContext = Dispatchers.IO
 ) {
 
-    suspend fun invoke(changes: NoteChanges): Note {
+    suspend operator fun invoke(changes: NoteChanges): Note {
         return withContext(coroutineDispatcher) {
             val nowMillis = Clock.System.now().toEpochMilliseconds()
             val note = Note(

@@ -30,6 +30,10 @@ kotlin {
             // put your Multiplatform dependencies here
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.datetime)
+
+            // koin
+            api(project.dependencies.platform(libs.koin.bom))
+            api(libs.koin.core)
         }
     }
 }

@@ -14,7 +14,7 @@ class ChangeNoteUseCase(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun invoke(noteId: Long, changes: NoteChanges): Note {
+    suspend operator fun invoke(noteId: Long, changes: NoteChanges): Note {
         return withContext(coroutineDispatcher) {
             val note = noteRepository.getNoteById(noteId)
                 ?: error("Note not found")

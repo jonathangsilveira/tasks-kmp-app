@@ -12,7 +12,7 @@ class GetNoteByIdUseCase(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun invoke(id: Long): Note? {
+    suspend operator fun invoke(id: Long): Note? {
         return withContext(coroutineDispatcher) {
             noteRepository.getNoteById(id)
         }
