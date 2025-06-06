@@ -20,4 +20,13 @@
     <string name="note_save_content_description">
         Save your changes for this note
     </string>
+    <string name="generic_error_message">
+        Something went wrong
+    </string>
+    <string name="notes_screen_title">
+        Notes
+    </string>
+    <string name="note_add_contnet_description">
+        Add a new note
+    </string>
 </resources>
