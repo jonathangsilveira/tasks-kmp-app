@@ -35,7 +35,7 @@ internal class ManageNoteInteractor(
             NoteChangesViewData(
                 noteId = note.id,
                 title = note.title,
-                description = note.title
+                description = note.description
             )
         } ?: NoteChangesViewData()
     }
