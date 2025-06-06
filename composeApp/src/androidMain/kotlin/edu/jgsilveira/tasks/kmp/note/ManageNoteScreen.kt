@@ -3,16 +3,23 @@ package edu.jgsilveira.tasks.kmp.note
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -24,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -66,14 +74,14 @@ internal fun ManageNoteScreen(
                 is ManageNoteUIState.Content -> {
                     ManageNoteContent(
                         viewData = uiState.viewData,
+                        modifier = Modifier.fillMaxSize()
+                            .padding(innerPadding),
                         onTitleChange = { newTitle ->
                             viewModel.updateTitle(newTitle)
                         },
                         onDescriptionChange = { newDescription ->
                             viewModel.updateDescription(newDescription)
-                        },
-                        modifier = Modifier.fillMaxSize()
-                            .padding(innerPadding)
+                        }
                     )
                 }
                 ManageNoteUIState.Initial -> {
@@ -91,9 +99,6 @@ internal fun ManageNoteScreen(
         ConsumeUIEffect(viewModel.uiEffects) { uiEffect ->
             when (uiEffect) {
                 is ManageNoteUIEffect.ShowSnackBar -> {
-                    /*val message = stringResource(
-                        uiEffect.messageRes
-                    )*/
                     coroutineScope.launch {
                         scaffoldState.snackbarHostState.showSnackbar(
                             message = "Note saved!",
@@ -177,37 +182,49 @@ internal fun ManageNoteContent(
     ) {
         TextField(
             value = viewData.title,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth()
+                .heightIn(min = TextFieldDefaults.MinHeight)
+                .padding(horizontal = 8.dp),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next
+            ),
             onValueChange = { newTitle ->
                 onTitleChange?.invoke(newTitle)
             },
             placeholder = {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.wrapContentSize()
+                        .height(40.dp),
                     text = stringResource(
                         Res.string.note_title_placeholder
                     )
                 )
-            },
-            maxLines = 1,
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 8.dp)
+            }
         )
         TextField(
             value = viewData.description.orEmpty(),
+            maxLines = 3,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Default
+            ),
+            modifier = Modifier.fillMaxWidth()
+                .fillMaxHeight()
+                .padding(horizontal = 8.dp),
             onValueChange = { newDescription ->
                 onDescriptionChange?.invoke(newDescription)
             },
             placeholder = {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.wrapContentSize()
+                        .height(40.dp),
                     text = stringResource(
                         Res.string.note_description_placeholder
                     )
                 )
-            },
-            maxLines = 3,
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 8.dp)
+            }
         )
     }
 }
