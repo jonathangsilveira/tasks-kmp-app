@@ -172,7 +172,6 @@ internal fun NoteListContent(
 ) {
     val lazyListState = rememberLazyListState()
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(space = 8.dp),
         modifier = modifier,
         state = lazyListState
     ) {
