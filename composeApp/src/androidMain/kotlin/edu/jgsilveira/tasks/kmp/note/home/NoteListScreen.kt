@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -254,13 +255,13 @@ private fun NoteListTopBar(
         },
         navigationIcon = {
             IconButton(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.wrapContentSize(),
                 enabled = true,
                 onClick = onNavigateIconClick
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.size(size = 24.dp),
                     contentDescription = stringResource(
                         Res.string.navigate_back_content_description
                     )
@@ -312,5 +313,16 @@ internal fun NoteListContentPreview() {
 internal fun NewNoteFabPreview() {
     MaterialTheme {
         NewNoteFab(onClick = {})
+    }
+}
+
+@Preview
+@Composable
+internal fun NoteListTopBarPreview() {
+    MaterialTheme {
+        NoteListTopBar(
+            modifier = Modifier.fillMaxWidth(),
+            onNavigateIconClick = {}
+        )
     }
 }
