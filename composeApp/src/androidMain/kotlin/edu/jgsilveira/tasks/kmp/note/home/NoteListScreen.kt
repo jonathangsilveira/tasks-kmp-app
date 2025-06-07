@@ -1,7 +1,5 @@
 package edu.jgsilveira.tasks.kmp.note.home
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
@@ -176,7 +173,7 @@ internal fun NoteListContent(
     val lazyListState = rememberLazyListState()
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(space = 8.dp),
-        modifier = modifier.padding(all = 16.dp),
+        modifier = modifier,
         state = lazyListState
     ) {
         itemsIndexed(
@@ -184,45 +181,45 @@ internal fun NoteListContent(
             key = { _, note -> note.noteId },
             contentType = { _, note -> note }
         ) { index, note ->
-            Box(
-                modifier = Modifier
-                    .border(
-                        border = BorderStroke(
-                            width = 2.dp,
-                            color = MaterialTheme.colors.primary
-                        ),
-                        shape = MaterialTheme.shapes.medium
-                    )
-                    .clickable {
-                        onNoteClick(note)
-                    }
-                    .padding(8.dp)
-
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(
-                            min = 48.dp,
-                            max = 56.dp
-                        )
-                ) {
-                    Text(text = note.title)
-                    if (!note.description.isNullOrBlank())
-                        Text(
-                            text = note.description,
-                            maxLines = 2
-                        )
+            NoteListItem(
+                viewData = note,
+                onClick = {
+                    onNoteClick(note)
                 }
-            }
-            if (index < items.lastIndex)
+            )
+            if (index < items.lastIndex) {
                 Divider(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                     color = MaterialTheme.colors.onSurface,
                     thickness = 1.dp
                 )
+            }
         }
+    }
+}
+
+@Composable
+private fun NoteListItem(
+    viewData: NoteItemViewData,
+    onClick: () -> Unit = {}
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .clickable(onClick = onClick)
+            .padding(
+                vertical = 8.dp,
+                horizontal = 16.dp
+            )
+    ) {
+        Text(text = viewData.title)
+        Text(
+            text = viewData.description.orEmpty(),
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
