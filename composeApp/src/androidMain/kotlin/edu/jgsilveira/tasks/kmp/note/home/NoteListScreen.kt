@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
@@ -275,11 +276,12 @@ private fun NewNoteFab(
 ) {
     FloatingActionButton(
         modifier = Modifier.size(48.dp),
-        shape = MaterialTheme.shapes.small,
+        shape = RoundedCornerShape(size = 12.dp),
         onClick = onClick
     ) {
         Icon(
             imageVector = Icons.Filled.Add,
+            tint = MaterialTheme.colors.onSecondary,
             contentDescription = stringResource(
                 Res.string.note_add_contnet_description
             )
@@ -302,5 +304,13 @@ internal fun NoteListContentPreview() {
                 )
             }
         )
+    }
+}
+
+@Preview
+@Composable
+internal fun NewNoteFabPreview() {
+    MaterialTheme {
+        NewNoteFab(onClick = {})
     }
 }
