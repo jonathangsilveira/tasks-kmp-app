@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -177,11 +179,11 @@ internal fun NoteListContent(
         modifier = modifier.padding(all = 16.dp),
         state = lazyListState
     ) {
-        items(
+        itemsIndexed(
             items = items,
-            key = { it.noteId },
-            contentType = { it }
-        ) { note ->
+            key = { _, note -> note.noteId },
+            contentType = { _, note -> note }
+        ) { index, note ->
             Box(
                 modifier = Modifier
                     .border(
@@ -214,6 +216,12 @@ internal fun NoteListContent(
                         )
                 }
             }
+            if (index < items.lastIndex)
+                Divider(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colors.onSurface,
+                    thickness = 1.dp
+                )
         }
     }
 }
