@@ -73,9 +73,7 @@ internal class ManageNoteViewModel(
             val newViewData = interactor.saveNote(
                 content.viewData
             )
-            mutableState.value = ManageNoteUIState.Content(
-                newViewData
-            )
+            mutableState.value = ManageNoteUIState.Content(newViewData)
             uiEffectChannel.trySend(
                 ManageNoteUIEffect.ShowSnackBar(
                     messageRes = Res.string.note_saved
