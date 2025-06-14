@@ -1,4 +1,4 @@
-package edu.jgsilveira.tasks.kmp.note
+package edu.jgsilveira.tasks.kmp.features.notes.manage
 
 import edu.jgsilveira.tasks.kmp.domain.model.NoteChanges
 import edu.jgsilveira.tasks.kmp.domain.usecase.ChangeNoteUseCase
