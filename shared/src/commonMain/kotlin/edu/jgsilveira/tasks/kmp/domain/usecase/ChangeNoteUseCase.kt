@@ -1,6 +1,6 @@
 package edu.jgsilveira.tasks.kmp.domain.usecase
 
-import edu.jgsilveira.tasks.kmp.data.NoteRepository
+import edu.jgsilveira.tasks.kmp.data.repository.NoteRepository
 import edu.jgsilveira.tasks.kmp.domain.model.NoteChanges
 import edu.jgsilveira.tasks.kmp.domain.model.Note
 import kotlinx.coroutines.CoroutineDispatcher
