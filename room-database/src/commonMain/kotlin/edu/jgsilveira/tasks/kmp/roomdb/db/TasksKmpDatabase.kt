@@ -38,6 +38,6 @@ fun getRoomDatabase(
             dropAllTables = true
         )
         .setDriver(BundledSQLiteDriver())
-        .addTypeConverter(BooleanRoomTypeConverter)
+        .addTypeConverter(BooleanRoomTypeConverter())
         .build()
 }

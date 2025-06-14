@@ -4,7 +4,7 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 
 @ProvidedTypeConverter
-internal object BooleanRoomTypeConverter {
+internal class BooleanRoomTypeConverter {
 
     @TypeConverter
     fun fromBoolean(value: Boolean): Int {
