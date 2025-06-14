@@ -1,4 +1,4 @@
-package edu.jgsilveira.tasks.kmp.note.home
+package edu.jgsilveira.tasks.kmp.features.notes.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

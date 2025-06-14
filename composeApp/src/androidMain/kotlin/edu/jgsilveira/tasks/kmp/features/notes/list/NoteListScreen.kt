@@ -1,4 +1,4 @@
-package edu.jgsilveira.tasks.kmp.note.home
+package edu.jgsilveira.tasks.kmp.features.notes.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
