@@ -1,4 +1,4 @@
-package edu.jgsilveira.tasks.kmp.note
+package edu.jgsilveira.tasks.kmp.features.notes.manage
 
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModel

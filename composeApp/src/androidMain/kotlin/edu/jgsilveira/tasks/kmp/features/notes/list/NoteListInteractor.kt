@@ -1,4 +1,4 @@
-package edu.jgsilveira.tasks.kmp.note.home
+package edu.jgsilveira.tasks.kmp.features.notes.list
 
 import edu.jgsilveira.tasks.kmp.domain.usecase.GetAllNotesUseCase
 

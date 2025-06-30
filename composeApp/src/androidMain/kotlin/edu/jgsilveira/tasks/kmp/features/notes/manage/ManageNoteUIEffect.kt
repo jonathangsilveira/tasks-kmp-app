@@ -1,4 +1,4 @@
-package edu.jgsilveira.tasks.kmp.note
+package edu.jgsilveira.tasks.kmp.features.notes.manage
 
 import org.jetbrains.compose.resources.StringResource
 
