@@ -1,5 +1,5 @@
 [versions]
-agp = "8.10.0"
+agp = "8.10.1"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -13,10 +13,24 @@ androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.3"
 junit = "4.13.2"
-kotlin = "2.1.20"
+kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
 
 datetime = "0.6.1"
+
+koin-bom = "4.0.0"
+
+navigation-compose = "2.9.0-beta01"
+
+kotlinx-serialization-json = "1.8.1"
+runner = "1.5.2"
+core = "1.5.0"
+
+ksp = "2.0.20-1.0.25"
+
+# Room SQLite
+room = "2.7.0-rc03"
+sqlite = "2.5.0-SNAPSHOT"
 
 ktor = "3.1.2"
 
@@ -42,6 +56,27 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", versio
 # DateTime
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 
+# Koin
+koin-core = { module = "io.insert-koin:koin-core"}
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-android = { module = "io.insert-koin:koin-android"}
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose"}
+
+# Navigation
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+
+# Serialization
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+
+# Tests
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
 # Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -55,3 +90,9 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }

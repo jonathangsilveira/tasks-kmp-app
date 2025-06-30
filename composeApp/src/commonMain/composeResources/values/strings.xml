@@ -1,0 +1,29 @@
+<resources>
+    <string name="note_saved">
+        Note saved!
+    </string>
+    <string name="note_failed_on_saving">
+        Failure failed on saving!
+    </string>
+    <string name="note_title_placeholder">Give a title for your note</string>
+    <string name="note_description_placeholder">Describe your note</string>
+    <string name="navigate_back_content_description">
+        Back to previous screen
+    </string>
+    <string name="note">
+        Note
+    </string>
+    <string name="note_save_content_description">
+        Save your changes for this note
+    </string>
+    <string name="generic_error_message">
+        Something went wrong
+    </string>
+    <string name="notes_screen_title">
+        Notes
+    </string>
+    <string name="note_add_contnet_description">
+        Add a new note
+    </string>
+    <string name="notes_list_empty_state_message">There are no notes yet.\nClick on "Add new note" button to add your brand new one!</string>
+</resources>

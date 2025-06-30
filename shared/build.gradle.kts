@@ -25,9 +25,16 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
+            // Modules
+            api(projects.roomDatabase)
+
             // put your Multiplatform dependencies here
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.datetime)
+
+            // koin
+            api(project.dependencies.platform(libs.koin.bom))
+            api(libs.koin.core)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)

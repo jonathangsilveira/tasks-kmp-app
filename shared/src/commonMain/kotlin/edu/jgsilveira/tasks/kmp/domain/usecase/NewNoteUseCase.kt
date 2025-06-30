@@ -1,6 +1,6 @@
 package edu.jgsilveira.tasks.kmp.domain.usecase
 
-import edu.jgsilveira.tasks.kmp.data.NoteRepository
+import edu.jgsilveira.tasks.kmp.data.repository.NoteRepository
 import edu.jgsilveira.tasks.kmp.domain.model.NoteChanges
 import edu.jgsilveira.tasks.kmp.domain.model.NEW_NOTE_ID
 import edu.jgsilveira.tasks.kmp.domain.model.Note
@@ -15,7 +15,7 @@ class NewNoteUseCase(
     private val coroutineDispatcher: CoroutineContext = Dispatchers.IO
 ) {
 
-    suspend fun invoke(changes: NoteChanges): Note {
+    suspend operator fun invoke(changes: NoteChanges): Note {
         return withContext(coroutineDispatcher) {
             val nowMillis = Clock.System.now().toEpochMilliseconds()
             val note = Note(
@@ -23,7 +23,8 @@ class NewNoteUseCase(
                 title = changes.title,
                 description = changes.description,
                 createdAt = nowMillis,
-                updatedAt = nowMillis
+                updatedAt = nowMillis,
+                isDone = false
             )
             noteRepository.upsertNote(note)
         }

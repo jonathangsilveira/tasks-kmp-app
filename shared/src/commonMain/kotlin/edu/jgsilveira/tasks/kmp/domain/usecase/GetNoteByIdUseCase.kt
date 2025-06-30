@@ -1,6 +1,6 @@
 package edu.jgsilveira.tasks.kmp.domain.usecase
 
-import edu.jgsilveira.tasks.kmp.data.NoteRepository
+import edu.jgsilveira.tasks.kmp.data.repository.NoteRepository
 import edu.jgsilveira.tasks.kmp.domain.model.Note
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ class GetNoteByIdUseCase(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun invoke(id: Long): Note? {
+    suspend operator fun invoke(id: Long): Note? {
         return withContext(coroutineDispatcher) {
             noteRepository.getNoteById(id)
         }

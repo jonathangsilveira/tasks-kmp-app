@@ -1,6 +1,6 @@
 package edu.jgsilveira.tasks.kmp.domain.usecase
 
-import edu.jgsilveira.tasks.kmp.data.NoteRepository
+import edu.jgsilveira.tasks.kmp.data.repository.NoteRepository
 import edu.jgsilveira.tasks.kmp.domain.model.NoteChanges
 import edu.jgsilveira.tasks.kmp.domain.model.Note
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,7 +14,7 @@ class ChangeNoteUseCase(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun invoke(noteId: Long, changes: NoteChanges): Note {
+    suspend operator fun invoke(noteId: Long, changes: NoteChanges): Note {
         return withContext(coroutineDispatcher) {
             val note = noteRepository.getNoteById(noteId)
                 ?: error("Note not found")
