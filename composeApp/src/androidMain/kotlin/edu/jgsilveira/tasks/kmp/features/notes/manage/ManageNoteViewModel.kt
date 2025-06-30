@@ -45,13 +45,17 @@ internal class ManageNoteViewModel(
 
     fun updateTitle(title: String?) {
         mutableState.update { currentState ->
-            val uiState = currentState as? ManageNoteUIState.Content
-                ?: return@update currentState
-            uiState.copy(
-                viewData = uiState.viewData.copy(
-                    title = title.orEmpty()
-                )
-            )
+            when (currentState) {
+                is ManageNoteUIState.Content -> {
+                    val currentViewData = currentState.viewData
+                    currentState.copy(
+                        viewData = currentViewData.copy(
+                            title = title.orEmpty()
+                        )
+                    )
+                }
+                else -> currentState
+            }
         }
     }
 

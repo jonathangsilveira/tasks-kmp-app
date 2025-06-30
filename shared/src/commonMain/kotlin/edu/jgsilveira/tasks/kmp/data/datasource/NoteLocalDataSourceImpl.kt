@@ -9,8 +9,8 @@ internal class NoteLocalDataSourceImpl(
 ) : NoteLocalDataSource {
 
     override suspend fun getNoteById(id: Long): Note? {
-        val note = dao.getNoteById(id)
-        return note?.let { NoteFactory.fromEntity(it) }
+        val entity = dao.getNoteById(id) ?: return null
+        return NoteFactory.fromEntity(entity)
     }
 
     override suspend fun getAllNotes(): List<Note> {
@@ -29,10 +29,8 @@ internal class NoteLocalDataSourceImpl(
     }
 
     override suspend fun markNoteAsDone(id: Long) {
-        val entity = dao.getNoteById(id)
-        entity?.let {
-            val markedAsDone = it.copy(isDone = true)
-            dao.upsertNote(markedAsDone)
-        }
+        val entity = dao.getNoteById(id) ?: return
+        val changedEntity = entity.copy(isDone = true)
+        dao.upsertNote(changedEntity)
     }
 }
