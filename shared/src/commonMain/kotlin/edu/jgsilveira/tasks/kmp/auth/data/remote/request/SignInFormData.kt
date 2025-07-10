@@ -1,0 +1,10 @@
+package edu.jgsilveira.tasks.kmp.auth.data.remote.request
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class SignInFormData(
+    @SerialName("email") val email: String,
+    @SerialName("password") val password: String
+)
