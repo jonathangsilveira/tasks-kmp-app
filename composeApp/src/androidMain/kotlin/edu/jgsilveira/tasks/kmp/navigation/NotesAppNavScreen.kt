@@ -13,4 +13,12 @@ internal sealed interface NotesAppNavScreen {
     data class ManageNote(
         val id: Long
     ) : NotesAppNavScreen
+
+    @Serializable
+    @SerialName("signup")
+    data object SignUp : NotesAppNavScreen
+
+    @Serializable
+    @SerialName("signin")
+    data object SignIn : NotesAppNavScreen
 }

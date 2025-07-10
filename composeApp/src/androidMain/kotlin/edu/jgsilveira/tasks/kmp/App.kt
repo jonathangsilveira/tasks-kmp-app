@@ -13,6 +13,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import edu.jgsilveira.tasks.kmp.domain.model.NEW_NOTE_ID
+import edu.jgsilveira.tasks.kmp.features.auth.signin.SignInScreen
+import edu.jgsilveira.tasks.kmp.features.auth.signup.SignUpScreen
 import edu.jgsilveira.tasks.kmp.navigation.NotesAppNavScreen
 import edu.jgsilveira.tasks.kmp.features.notes.manage.ManageNoteScreen
 import edu.jgsilveira.tasks.kmp.features.notes.manage.ManageNoteViewModel
@@ -30,7 +32,7 @@ fun App() {
         val navHostController = rememberNavController()
         NavHost(
             navController = navHostController,
-            startDestination = NotesAppNavScreen.NoteListScreen,
+            startDestination = NotesAppNavScreen.SignIn,
             modifier = Modifier.fillMaxSize()
                 .windowInsetsPadding(WindowInsets.statusBars)
         ) {
@@ -68,6 +70,33 @@ fun App() {
                     modifier = Modifier.fillMaxSize(),
                     onNavigateBackClick = {
                         navHostController.navigateUp()
+                    }
+                )
+            }
+
+            composable<NotesAppNavScreen.SignUp> {
+                SignUpScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    navigateUp = {
+                        navHostController.navigate(
+                            route = NotesAppNavScreen.NoteListScreen
+                        )
+                    }
+                )
+            }
+
+            composable<NotesAppNavScreen.SignIn> {
+                SignInScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    navigateToHome = {
+                        navHostController.navigate(
+                            route = NotesAppNavScreen.NoteListScreen
+                        )
+                    },
+                    navigateToSignUp = {
+                        navHostController.navigate(
+                            route = NotesAppNavScreen.SignUp
+                        )
                     }
                 )
             }
