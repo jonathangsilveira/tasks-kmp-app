@@ -35,14 +35,17 @@ internal class SignUpViewModel(
     fun dispatchAction(uiAction: SignUpUiAction) {
         when (uiAction) {
             is SignUpUiAction.SignUpButtonClick -> signUp(uiAction)
-            SignUpUiAction.CloseClick -> uiEffectChannel.trySend(SignUpUiEffect.NavigateUp)
+            SignUpUiAction.CloseClick -> {
+                uiEffectChannel.trySend(SignUpUiEffect.NavigateUp)
+            }
+            SignUpUiAction.RetrySignUp -> retry()
         }
     }
 
     private fun signUp(uiAction: SignUpUiAction.SignUpButtonClick) {
         val form = with(uiAction) {
             SignUpForm(
-                fullName = fullname,
+                fullName = fullName,
                 email = email,
                 password = password
             )
@@ -62,6 +65,12 @@ internal class SignUpViewModel(
                         )
                     )
                 }
+        }
+    }
+
+    private fun retry() {
+        viewModelScope.launch {
+            mutableState.emit(SignUpUiState.Initial)
         }
     }
 }
