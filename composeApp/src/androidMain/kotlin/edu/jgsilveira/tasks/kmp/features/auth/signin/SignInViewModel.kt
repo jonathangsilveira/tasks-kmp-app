@@ -49,6 +49,7 @@ internal class SignInViewModel(
             }
             signInUseCase(form)
                 .onSuccess {
+                    mutableState.emit(SignInUiState.Initial)
                     uiEffectChannel.trySend(SignInUiEffect.NavigateToHome)
                 }
                 .onFailure {
