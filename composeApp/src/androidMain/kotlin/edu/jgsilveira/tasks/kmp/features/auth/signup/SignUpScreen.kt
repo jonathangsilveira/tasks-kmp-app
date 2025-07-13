@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -21,6 +22,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -33,6 +36,13 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.KoinContext
+import taskskmpapp.composeapp.generated.resources.Res
+import taskskmpapp.composeapp.generated.resources.email
+import taskskmpapp.composeapp.generated.resources.full_name
+import taskskmpapp.composeapp.generated.resources.generic_error_message
+import taskskmpapp.composeapp.generated.resources.password
+import taskskmpapp.composeapp.generated.resources.register
+import taskskmpapp.composeapp.generated.resources.signup_success_message
 
 @Composable
 fun SignUpScreen(
@@ -109,7 +119,7 @@ private fun FormSignUpScreenContent(
         OutlinedTextField(
             value = fullNameState,
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            placeholder = "Full Name",
+            placeholder = stringResource(Res.string.full_name),
             onValueChange = { newValue ->
                 fullNameState = newValue
             }
@@ -117,7 +127,7 @@ private fun FormSignUpScreenContent(
         OutlinedTextField(
             value = emailState,
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            placeholder = "E-mail",
+            placeholder = stringResource(Res.string.email),
             onValueChange = { newValue ->
                 emailState = newValue
             }
@@ -125,7 +135,11 @@ private fun FormSignUpScreenContent(
         OutlinedTextField(
             value = passwordState,
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            placeholder = "Password",
+            placeholder = stringResource(Res.string.password),
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
             onValueChange = { newValue ->
                 passwordState = newValue
             }
@@ -142,7 +156,7 @@ private fun FormSignUpScreenContent(
                 )
             }
         ) {
-            Text(text = "Register")
+            Text(text = stringResource(Res.string.register))
         }
     }
 }
@@ -166,7 +180,7 @@ private fun SuccessSignUpScreenContent(
 ) {
     Box(modifier) {
         Text(
-            text = "Sign up has finished with success!",
+            text = stringResource(Res.string.signup_success_message),
             modifier = Modifier.align(Alignment.Center)
         )
     }
