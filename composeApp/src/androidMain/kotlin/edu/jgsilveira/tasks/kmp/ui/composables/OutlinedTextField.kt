@@ -12,11 +12,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
@@ -35,6 +39,7 @@ fun OutlinedTextField(
     maxLines: Int = Int.MAX_VALUE,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     placeholder: String? = null,
     onValueChange: (newValue: String) -> Unit = {}
 ) {
@@ -67,6 +72,7 @@ fun OutlinedTextField(
             maxLines = maxLines,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
+            visualTransformation = visualTransformation,
             onValueChange = onValueChange
         )
     }
@@ -91,6 +97,21 @@ private fun OutlinedTextFieldWithTextPreview() {
         OutlinedTextField(
             value = "Some text...",
             modifier = Modifier.fillMaxWidth().wrapContentHeight()
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun OutlinedTextFieldAsPasswordPreview() {
+    MaterialTheme {
+        OutlinedTextField(
+            value = "chablau",
+            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            )
         )
     }
 }
