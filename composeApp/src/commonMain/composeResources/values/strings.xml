@@ -26,4 +26,9 @@
         Add a new note
     </string>
     <string name="notes_list_empty_state_message">There are no notes yet.\nClick on "Add new note" button to add your brand new one!</string>
+    <string name="full_name">Full name</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="signup_success_message">Sign up has finished with success!</string>
 </resources>
