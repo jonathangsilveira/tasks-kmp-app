@@ -21,10 +21,10 @@ internal class AuthApiServiceImpl(
             formParameters = parameters {
                 append("full_name", formData.fullName)
                 append("email", formData.email)
-                append("password", formData.email)
+                append("password", formData.password)
             }
         )
-        if (response.status in HttpStatusCode.OK..HttpStatusCode.MultiStatus) {
+        if (response.status > HttpStatusCode.MultiStatus) {
             val errorBody = response.body<AuthErrorResponse>()
             error(message = errorBody.detail)
         }
@@ -39,7 +39,7 @@ internal class AuthApiServiceImpl(
                 append("password", formData.password)
             }
         )
-        if (response.status in HttpStatusCode.OK..HttpStatusCode.MultiStatus) {
+        if (response.status > HttpStatusCode.MultiStatus) {
             val errorResponse = response.body<AuthErrorResponse>()
             error(message = errorResponse.detail)
         }
