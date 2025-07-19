@@ -1,7 +1,10 @@
 package edu.jgsilveira.tasks.kmp
 
 import android.app.Application
+import edu.jgsilveira.tasks.kmp.auth.di.domainAuthKoinModule
 import edu.jgsilveira.tasks.kmp.di.domainKoinModule
+import edu.jgsilveira.tasks.kmp.features.auth.signin.signInFeatureKoinModule
+import edu.jgsilveira.tasks.kmp.features.auth.signup.signUpFeatureKoinModule
 import edu.jgsilveira.tasks.kmp.features.notes.list.noteListKoinModule
 import edu.jgsilveira.tasks.kmp.features.notes.manage.manageNoteKoinModule
 import edu.jgsilveira.tasks.kmp.roomdb.di.roomDatabaseBuilderKoinModule
@@ -20,7 +23,10 @@ class NotesKmpApp : Application() {
                 tasksKmpDatabaseKoinModule,
                 domainKoinModule,
                 noteListKoinModule,
-                manageNoteKoinModule
+                manageNoteKoinModule,
+                domainAuthKoinModule,
+                signUpFeatureKoinModule,
+                signInFeatureKoinModule
             )
         }
     }
