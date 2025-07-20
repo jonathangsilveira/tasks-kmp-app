@@ -29,14 +29,10 @@ internal abstract class UIViewModel<STATE: UIState, EFFECT: UIEffect, ACTION: UI
     abstract fun dispatchAction(uiAction: ACTION)
 
     protected fun setState(reducer: (currentState: STATE) -> STATE) {
-        viewModelScope.launch {
-            mutableState.update(reducer)
-        }
+        mutableState.update(reducer)
     }
 
     protected fun sendEffect(uiEffect: EFFECT) {
-        viewModelScope.launch {
-            uiEffectChannel.trySend(uiEffect)
-        }
+        uiEffectChannel.trySend(uiEffect)
     }
 }
