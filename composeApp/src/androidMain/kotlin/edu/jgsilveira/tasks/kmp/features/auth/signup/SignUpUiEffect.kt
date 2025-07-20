@@ -1,5 +1,7 @@
 package edu.jgsilveira.tasks.kmp.features.auth.signup
 
-sealed interface SignUpUiEffect {
+import edu.jgsilveira.tasks.kmp.core.arch.viewmodel.UIEffect
+
+internal sealed interface SignUpUiEffect : UIEffect {
     data object NavigateUp : SignUpUiEffect
 }
