@@ -36,6 +36,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import edu.jgsilveira.tasks.kmp.features.auth.signin.SignInUiAction
+import edu.jgsilveira.tasks.kmp.ui.composables.FeedbackScreenContent
+import edu.jgsilveira.tasks.kmp.ui.composables.FeedbackScreenContentType
 import edu.jgsilveira.tasks.kmp.ui.composables.OutlinedTextField
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.StringResource
@@ -45,6 +48,7 @@ import org.koin.compose.KoinContext
 import taskskmpapp.composeapp.generated.resources.Res
 import taskskmpapp.composeapp.generated.resources.email
 import taskskmpapp.composeapp.generated.resources.full_name
+import taskskmpapp.composeapp.generated.resources.generic_error_message
 import taskskmpapp.composeapp.generated.resources.password
 import taskskmpapp.composeapp.generated.resources.register
 import taskskmpapp.composeapp.generated.resources.retry
@@ -246,21 +250,13 @@ private fun ErrorSignUpScreenContent(
     modifier: Modifier = Modifier,
     onUiAction: (SignUpUiAction) -> Unit = {}
 ) {
-    Box(modifier, contentAlignment = Alignment.Center) {
-        Column(
-            modifier = Modifier.wrapContentSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(messageResource)
-            )
-            TextButton(
-                onClick = { onUiAction(SignUpUiAction.RetrySignUp) }
-            ) {
-                Text(text = stringResource(Res.string.retry))
-            }
-        }
-    }
+    FeedbackScreenContent(
+        messageText = stringResource(messageResource),
+        primaryButtonText = stringResource(Res.string.retry),
+        type = FeedbackScreenContentType.ERROR,
+        modifier = modifier,
+        onPrimaryButtonClick = { onUiAction(SignUpUiAction.RetrySignUp) }
+    )
 }
 
 @Preview
@@ -268,6 +264,17 @@ private fun ErrorSignUpScreenContent(
 private fun FormSignUpScreenContentPreview() {
     MaterialTheme {
         FormSignUpScreenContent(
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun ErrorSignUpScreenContentPreview() {
+    MaterialTheme {
+        ErrorSignUpScreenContent(
+            messageResource = Res.string.generic_error_message,
             modifier = Modifier.fillMaxSize()
         )
     }
