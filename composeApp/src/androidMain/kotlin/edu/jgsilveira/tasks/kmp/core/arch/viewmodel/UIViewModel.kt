@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-internal abstract class UIViewModel<STATE: UIState, EFFECT: UIEffect, ACTION: UIState>(
+internal abstract class UIViewModel<STATE: UIState, EFFECT: UIEffect, ACTION: UIAction>(
     initialState: STATE
 ) : ViewModel() {
 
@@ -29,7 +29,9 @@ internal abstract class UIViewModel<STATE: UIState, EFFECT: UIEffect, ACTION: UI
     abstract fun dispatchAction(uiAction: ACTION)
 
     protected fun setState(reducer: (currentState: STATE) -> STATE) {
-        mutableState.update(reducer)
+        viewModelScope.launch {
+            mutableState.update(reducer)
+        }
     }
 
     protected fun sendEffect(uiEffect: EFFECT) {
