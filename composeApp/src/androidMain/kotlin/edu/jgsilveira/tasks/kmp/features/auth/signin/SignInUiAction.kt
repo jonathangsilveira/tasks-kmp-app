@@ -1,6 +1,8 @@
 package edu.jgsilveira.tasks.kmp.features.auth.signin
 
-internal sealed interface SignInUiAction {
+import edu.jgsilveira.tasks.kmp.core.arch.viewmodel.UIAction
+
+internal sealed interface SignInUiAction : UIAction {
     data class SignInClick(
         val email: String,
         val password: String
