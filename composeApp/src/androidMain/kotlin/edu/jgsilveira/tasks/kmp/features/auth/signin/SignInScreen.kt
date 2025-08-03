@@ -35,7 +35,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackScreenContent
+import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackContent
 import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackContentType
 import edu.jgsilveira.tasks.kmp.ui.composables.OutlinedTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -208,7 +208,7 @@ private fun ErrorSignInScreenContent(
     modifier: Modifier = Modifier,
     onUiAction: (SignInUiAction) -> Unit = {}
 ) {
-    FeedbackScreenContent(
+    FeedbackContent(
         messageText = stringResource(messageResource),
         primaryButtonText = stringResource(Res.string.retry),
         type = FeedbackContentType.ERROR,

@@ -26,7 +26,7 @@ import taskskmpapp.composeapp.generated.resources.generic_error_message
 import taskskmpapp.composeapp.generated.resources.retry
 
 @Composable
-fun FeedbackScreenContent(
+fun FeedbackContent(
     messageText: String,
     primaryButtonText: String,
     modifier: Modifier = Modifier,
@@ -89,9 +89,9 @@ fun FeedbackScreenContent(
 
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
-private fun ErrorFeedbackScreenContentPreview() {
+private fun ErrorFeedbackContentPreview() {
     MaterialTheme {
-        FeedbackScreenContent(
+        FeedbackContent(
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
@@ -103,9 +103,9 @@ private fun ErrorFeedbackScreenContentPreview() {
 
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
-private fun WarningFeedbackScreenContentPreview() {
+private fun WarningFeedbackContentPreview() {
     MaterialTheme {
-        FeedbackScreenContent(
+        FeedbackContent(
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
@@ -117,9 +117,9 @@ private fun WarningFeedbackScreenContentPreview() {
 
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
-private fun SuccessFeedbackScreenContentPreview() {
+private fun SuccessFeedbackContentPreview() {
     MaterialTheme {
-        FeedbackScreenContent(
+        FeedbackContent(
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
@@ -131,9 +131,9 @@ private fun SuccessFeedbackScreenContentPreview() {
 
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
-private fun InfoFeedbackScreenContentPreview() {
+private fun InfoFeedbackContentPreview() {
     MaterialTheme {
-        FeedbackScreenContent(
+        FeedbackContent(
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
