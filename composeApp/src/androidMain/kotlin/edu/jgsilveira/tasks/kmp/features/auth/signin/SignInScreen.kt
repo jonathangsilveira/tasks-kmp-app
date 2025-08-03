@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
@@ -36,6 +35,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackContent
+import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackContentType
 import edu.jgsilveira.tasks.kmp.ui.composables.OutlinedTextField
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.StringResource
@@ -207,21 +208,13 @@ private fun ErrorSignInScreenContent(
     modifier: Modifier = Modifier,
     onUiAction: (SignInUiAction) -> Unit = {}
 ) {
-    Box(modifier, contentAlignment = Alignment.Center) {
-        Column(
-            modifier = Modifier.wrapContentSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(messageResource)
-            )
-            TextButton(
-                onClick = { onUiAction(SignInUiAction.RetrySignIn) }
-            ) {
-                Text(text = stringResource(Res.string.retry))
-            }
-        }
-    }
+    FeedbackContent(
+        messageText = stringResource(messageResource),
+        primaryButtonText = stringResource(Res.string.retry),
+        type = FeedbackContentType.ERROR,
+        modifier = modifier,
+        onPrimaryButtonClick = { onUiAction(SignInUiAction.RetrySignIn) }
+    )
 }
 
 @Preview
