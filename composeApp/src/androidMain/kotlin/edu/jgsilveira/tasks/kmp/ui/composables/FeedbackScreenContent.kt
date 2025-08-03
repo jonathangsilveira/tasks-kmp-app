@@ -1,5 +1,6 @@
 package edu.jgsilveira.tasks.kmp.ui.composables
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -68,7 +69,7 @@ object FeedbackScreenContentDefaults {
 
     val VerticalSpacing = 8.dp
     val IconContainerSize = 72.dp
-    val IconSize = 24.dp
+    val IconSize = 32.dp
 
     val TitleStyle: TextStyle
         @Composable
