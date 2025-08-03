@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
@@ -16,7 +15,6 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -36,9 +34,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import edu.jgsilveira.tasks.kmp.features.auth.signin.SignInUiAction
-import edu.jgsilveira.tasks.kmp.ui.composables.FeedbackScreenContent
-import edu.jgsilveira.tasks.kmp.ui.composables.FeedbackScreenContentType
+import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackScreenContent
+import edu.jgsilveira.tasks.kmp.ui.composables.feedback.FeedbackContentType
 import edu.jgsilveira.tasks.kmp.ui.composables.OutlinedTextField
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.StringResource
@@ -253,7 +250,7 @@ private fun ErrorSignUpScreenContent(
     FeedbackScreenContent(
         messageText = stringResource(messageResource),
         primaryButtonText = stringResource(Res.string.retry),
-        type = FeedbackScreenContentType.ERROR,
+        type = FeedbackContentType.ERROR,
         modifier = modifier,
         onPrimaryButtonClick = { onUiAction(SignUpUiAction.RetrySignUp) }
     )

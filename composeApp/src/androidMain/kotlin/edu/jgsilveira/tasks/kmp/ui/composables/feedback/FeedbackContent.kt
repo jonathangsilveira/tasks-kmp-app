@@ -1,6 +1,5 @@
-package edu.jgsilveira.tasks.kmp.ui.composables
+package edu.jgsilveira.tasks.kmp.ui.composables.feedback
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,82 +15,22 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Done
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import edu.jgsilveira.tasks.kmp.ui.theme.ColorsDefault
 import org.jetbrains.compose.resources.stringResource
 import taskskmpapp.composeapp.generated.resources.Res
 import taskskmpapp.composeapp.generated.resources.generic_error_message
 import taskskmpapp.composeapp.generated.resources.retry
-
-enum class FeedbackScreenContentType(
-    val containerColor: Color,
-    val iconImage: ImageVector,
-    val iconTint: Color = Color.White
-) {
-    INFO(
-        iconImage = Icons.Rounded.Info,
-        containerColor = ColorsDefault.Blue300,
-        iconTint = ColorsDefault.Blue700
-    ),
-    WARNING(
-        iconImage = Icons.Rounded.Warning,
-        containerColor = ColorsDefault.Amber300,
-        iconTint = ColorsDefault.Amber700
-    ),
-    ERROR(
-        iconImage = Icons.Rounded.Close,
-        containerColor = ColorsDefault.Red300,
-        iconTint = ColorsDefault.Red700
-    ),
-    SUCCESS(
-        iconImage = Icons.Rounded.Done,
-        containerColor = ColorsDefault.Green300,
-        iconTint = ColorsDefault.Green700
-    )
-}
-
-object FeedbackScreenContentDefaults {
-    val DefaultType = FeedbackScreenContentType.INFO
-
-    val VerticalSpacing = 8.dp
-    val IconContainerSize = 72.dp
-    val IconSize = 32.dp
-
-    val TitleStyle: TextStyle
-        @Composable
-        @ReadOnlyComposable
-        get() = MaterialTheme.typography.h5.copy(
-            textAlign = TextAlign.Center
-        )
-
-    val MessageStyle: TextStyle
-        @Composable
-        @ReadOnlyComposable
-        get() = MaterialTheme.typography.body1.copy(
-            textAlign = TextAlign.Center
-        )
-}
 
 @Composable
 fun FeedbackScreenContent(
     messageText: String,
     primaryButtonText: String,
     modifier: Modifier = Modifier,
-    type: FeedbackScreenContentType = FeedbackScreenContentDefaults.DefaultType,
+    type: FeedbackContentType = FeedbackContentDefaults.DefaultType,
     titleText: String? = null,
     onPrimaryButtonClick: () -> Unit = {}
 ) {
@@ -99,13 +38,13 @@ fun FeedbackScreenContent(
         modifier.padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
-            space = FeedbackScreenContentDefaults.VerticalSpacing,
+            space = FeedbackContentDefaults.VerticalSpacing,
             alignment = Alignment.CenterVertically
         )
     ) {
         Box(
             modifier = Modifier.size(
-                FeedbackScreenContentDefaults.IconContainerSize
+                FeedbackContentDefaults.IconContainerSize
             ).background(
                 color = type.containerColor,
                 shape = CircleShape
@@ -115,29 +54,29 @@ fun FeedbackScreenContent(
                 imageVector = type.iconImage,
                 tint = type.iconTint,
                 contentDescription = null,
-                modifier = Modifier.size(FeedbackScreenContentDefaults.IconSize)
+                modifier = Modifier.size(FeedbackContentDefaults.IconSize)
                     .align(Alignment.Center)
             )
         }
         Spacer(
             modifier = Modifier.fillMaxWidth()
-                .height(FeedbackScreenContentDefaults.VerticalSpacing)
+                .height(FeedbackContentDefaults.VerticalSpacing)
         )
         if (!titleText.isNullOrBlank()) {
             Text(
                 text = titleText,
                 modifier = Modifier.fillMaxWidth(),
-                style = FeedbackScreenContentDefaults.TitleStyle
+                style = FeedbackContentDefaults.TitleStyle
             )
         }
         Text(
             text = messageText,
             modifier = Modifier.fillMaxWidth(),
-            style = FeedbackScreenContentDefaults.MessageStyle
+            style = FeedbackContentDefaults.MessageStyle
         )
         Spacer(
             modifier = Modifier.fillMaxWidth()
-                .height(FeedbackScreenContentDefaults.VerticalSpacing)
+                .height(FeedbackContentDefaults.VerticalSpacing)
         )
         TextButton(
             onClick = onPrimaryButtonClick,
@@ -156,7 +95,7 @@ private fun ErrorFeedbackScreenContentPreview() {
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
-            type = FeedbackScreenContentType.ERROR,
+            type = FeedbackContentType.ERROR,
             modifier = Modifier.fillMaxSize()
         )
     }
@@ -170,7 +109,7 @@ private fun WarningFeedbackScreenContentPreview() {
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
-            type = FeedbackScreenContentType.WARNING,
+            type = FeedbackContentType.WARNING,
             modifier = Modifier.fillMaxSize()
         )
     }
@@ -184,7 +123,7 @@ private fun SuccessFeedbackScreenContentPreview() {
             titleText = stringResource(Res.string.generic_error_message),
             messageText = stringResource(Res.string.generic_error_message),
             primaryButtonText = stringResource(Res.string.retry),
-            type = FeedbackScreenContentType.SUCCESS,
+            type = FeedbackContentType.SUCCESS,
             modifier = Modifier.fillMaxSize()
         )
     }
