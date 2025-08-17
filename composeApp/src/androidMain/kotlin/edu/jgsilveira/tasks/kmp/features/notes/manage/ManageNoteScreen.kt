@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -33,17 +34,19 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import edu.jgsilveira.tasks.kmp.ui.composables.actioniconbutton.ActionIconButton
+import edu.jgsilveira.tasks.kmp.ui.composables.topbar.TopBar
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import taskskmpapp.composeapp.generated.resources.Res
 import taskskmpapp.composeapp.generated.resources.navigate_back_content_description
 import taskskmpapp.composeapp.generated.resources.note
@@ -129,13 +132,12 @@ internal fun ManageNoteScreen(
 }
 
 @Composable
-@Preview
 private fun ManageNoteTopBar(
     modifier: Modifier = Modifier,
     onNavigateIconClick: () -> Unit = {},
     onSaveClick: () -> Unit = {}
 ) {
-    TopAppBar(
+    TopBar(
         modifier = modifier,
         title = {
             Text(
@@ -145,36 +147,23 @@ private fun ManageNoteTopBar(
             )
         },
         navigationIcon = {
-            IconButton(
-                modifier = Modifier.wrapContentSize(),
-                enabled = true,
+            ActionIconButton(
+                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                iconContentDescription = stringResource(
+                    Res.string.navigate_back_content_description
+                ),
                 onClick = onNavigateIconClick
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    modifier = Modifier.size(size = 24.dp),
-                    contentDescription = stringResource(
-                        Res.string.navigate_back_content_description
-                    )
-                )
-            }
-        },
-        actions = {
-            IconButton(
-                modifier = Modifier.wrapContentSize(),
-                enabled = true,
-                onClick = onSaveClick
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Done,
-                    modifier = Modifier.size(size = 24.dp),
-                    contentDescription = stringResource(
-                        Res.string.note_save_content_description
-                    )
-                )
-            }
+            )
         }
-    )
+    ) {
+        ActionIconButton(
+            imageVector = Icons.Rounded.Done,
+            iconContentDescription = stringResource(
+                Res.string.note_save_content_description
+            ),
+            onClick = onSaveClick
+        )
+    }
 }
 
 @Composable
@@ -274,20 +263,30 @@ internal fun ConsumeUIEffect(
     }
 }
 
-@Composable
 @Preview
-internal fun ManageNoteContentPreview() {
+@Composable
+private fun ManageNoteTopBarPreview() {
+    MaterialTheme {
+        ManageNoteTopBar(Modifier.fillMaxWidth().wrapContentHeight())
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ManageNoteContentPreview() {
     val viewData = NoteChangesViewData(
         title = "",
         description = ""
     )
-    ManageNoteContent(
-        viewData = viewData,
-        modifier = Modifier.fillMaxSize()
-    )
+    MaterialTheme {
+        ManageNoteContent(
+            viewData = viewData,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun NoteFieldPreview() {
     MaterialTheme {
